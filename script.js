@@ -78,10 +78,54 @@ function renderArt() {
     grid.appendChild(card);
   });
 }
+  // Contact
+  function updateChar() {
+    const c = document.getElementById('msgBody').value.length;
+    document.getElementById('charCount').textContent = c + ' chars';
+  }
+ 
+  async function sendMessage() {
+    const from = document.getElementById('fromEmail').value.trim();
+    const subject = document.getElementById('subjectLine').value.trim();
+    const body = document.getElementById('msgBody').value.trim();
+    if (!from) { showToast('Please enter your email!'); return; }
+    if (!body) { showToast('Message is empty!'); return; }
+ 
+    const btn = document.getElementById('sendBtn');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+ 
+    try {
+      const res = await fetch('https://formspree.io/f/mojpwdak', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ email: from, subject: subject || '(no subject)', message: body })
+      });
+ 
+      if (res.ok) {
+        btn.textContent = 'Sent! ✓';
+        btn.classList.add('sent');
+        showToast('Message sent! ✨');
+        document.getElementById('fromEmail').value = '';
+        document.getElementById('subjectLine').value = '';
+        document.getElementById('msgBody').value = '';
+        document.getElementById('charCount').textContent = '0 chars';
+        setTimeout(() => {
+          btn.textContent = 'Send ↗';
+          btn.classList.remove('sent');
+          btn.disabled = false;
+        }, 3000);
+      } else {
+        throw new Error('Failed');
+      }
+    } catch {
+      showToast('Failed to send. Try again!');
+      btn.textContent = 'Send ↗';
+      btn.disabled = false;
+    }
+  }
 
-
-// ── Lightbox ───────────────────────────────
-const lightbox = document.getElementById('lightbox');
+    const lightbox = document.getElementById('lightbox');
 
 function openLightbox(w) {
   document.getElementById('lightboxImg').src   = w.src || '';
@@ -104,31 +148,51 @@ document.addEventListener('keydown', e => {
 
 
 // ── Contact form ───────────────────────────
-function updateChar() {
-  const c = document.getElementById('msgBody').value.length;
-  document.getElementById('charCount').textContent = c + ' chars';
-}
-
-function sendMessage() {
-  const from = document.getElementById('fromEmail').value.trim();
-  const body  = document.getElementById('msgBody').value.trim();
-  if (!from) { showToast('Please enter your email!'); return; }
-  if (!body)  { showToast('Message is empty!');       return; }
-
-  const btn = document.getElementById('sendBtn');
-  btn.textContent = 'Sent! ✓';
-  btn.classList.add('sent');
-  showToast('Message sent! ✨');
-
-  setTimeout(() => {
-    btn.textContent = 'Send ↗';
-    btn.classList.remove('sent');
-    document.getElementById('fromEmail').value   = '';
-    document.getElementById('subjectLine').value = '';
-    document.getElementById('msgBody').value     = '';
-    document.getElementById('charCount').textContent = '0 chars';
-  }, 3000);
-}
+  function updateChar() {
+    const c = document.getElementById('msgBody').value.length;
+    document.getElementById('charCount').textContent = c + ' chars';
+  }
+ 
+  async function sendMessage() {
+    const from = document.getElementById('fromEmail').value.trim();
+    const subject = document.getElementById('subjectLine').value.trim();
+    const body = document.getElementById('msgBody').value.trim();
+    if (!from) { showToast('Please enter your email!'); return; }
+    if (!body) { showToast('Message is empty!'); return; }
+ 
+    const btn = document.getElementById('sendBtn');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+ 
+    try {
+      const res = await fetch('https://formspree.io/f/mojpwdak', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ email: from, subject: subject || '(no subject)', message: body })
+      });
+ 
+      if (res.ok) {
+        btn.textContent = 'Sent! ✓';
+        btn.classList.add('sent');
+        showToast('Message sent! ✨');
+        document.getElementById('fromEmail').value = '';
+        document.getElementById('subjectLine').value = '';
+        document.getElementById('msgBody').value = '';
+        document.getElementById('charCount').textContent = '0 chars';
+        setTimeout(() => {
+          btn.textContent = 'Send ↗';
+          btn.classList.remove('sent');
+          btn.disabled = false;
+        }, 3000);
+      } else {
+        throw new Error('Failed');
+      }
+    } catch {
+      showToast('Failed to send. Try again!');
+      btn.textContent = 'Send ↗';
+      btn.disabled = false;
+    }
+  }
 
 
 // ── Toast ──────────────────────────────────
