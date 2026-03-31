@@ -31,7 +31,7 @@ function showPage(id) {
 //   src  — path relative to index.html, e.g. "images/work1.jpg"
 //           Leave as null to show a placeholder emoji instead.
 const works = [
-  { title: "台北市心理系聯合排球比賽",  caption: "我在前年台北市心理系聯合排球比賽中擔任美術設計的職位。在這份宣傳單中我選擇將心理系以心理「戲」的方式呈現並加上排球的元素來完成！",  src: "images/7-11.png" },
+  { title: "台北市心理系聯合排球比賽",  caption: "我在前年台北市心理系聯合排球比賽中擔任美術設計的職位。在這份宣傳單中我選擇將心理系以心理「戲」的方式呈現並加上排球的元素來完成！",  src: "images/北心海報.png" },
   { title: "母親節卡片（正面）",  caption: "這是我在2024年母親節時參加學校母親節卡片設計競賽的投稿作品。我將母親化身成魔術師來強調每次東西不見時媽媽一瞬間就可以找到時的奇蹟。",       src: "images/mothersdaycardfront_page-0001拷貝.jpg" },
   { title: "母親節卡片（背面）",  caption: "2024.",       src: "images/mothersdaycardback_page-0001拷貝.jpg" },
   { title: "法國旅行隨筆",  caption: "在法國旅行時的隨筆",       src: "images/france.png" },
